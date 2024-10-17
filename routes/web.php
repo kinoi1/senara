@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResellerController;
@@ -18,6 +19,10 @@ use App\Http\Controllers\ResellerController;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+Route::get('/register', [AuthController::class, 'sigup'])->name('register.index');
+Route::post('/doregister', [AuthController::class, 'register'])->name('doregister');
 
 Route::get('/reseller', [ResellerController::class, 'index'])->name('reseller.index');
 Route::post('/reseller/save', [ResellerController::class,"save"]);
