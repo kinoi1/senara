@@ -31,7 +31,7 @@
         </li>
         @foreach ($Menu as $a)          
           <li class="nav-item">
-            <a class="nav-link  " href="../pages/tables.html">
+            <a class="nav-link  " href="{{ $a->Link }}">
               {!! $a->Icon !!}
               <span class="nav-link-text ms-1">{{ $a->Name }}</span>
             </a>

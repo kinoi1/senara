@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index(){
 
-        $list_data = ProductModel::getallproduct();
+        $list_data = UserModel::getalluser();
         return view('backend.master.product.index',compact('list_data'));
     }
 
 
     public function edit(Request $request, $id)
     {
-        $data = ProductModel::getById($id);
+        $data = UserModel::getById($id);
 
         // Periksa apakah produk ditemukan
         if ($data) {
@@ -42,13 +43,13 @@ class UserController extends Controller
             $request->merge(['imagepath' => $imagePath]);
         }
 
-        if ($request->productid == '') {
-            $ResellerID = ProductModel::insert($request->all());
+        if ($request->userid == '') {
+            $ResellerID = UserModel::insert($request->all());
             return redirect()->route('product.index')
             ->with('success', 'Product created successfully.');
         } else {
             // Jika productId ada, jalankan update
-            $result = ProductModel::updateProduct($request->productid, $request->all());
+            $result = UserModel::updateProduct($request->userid, $request->all());
             return redirect()->route('product.index')
             ->with('success', 'Product update successfully.');
         }
@@ -56,7 +57,7 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $data = ProductModel::deleteData($id);
+        $data = UserModel::deleteData($id);
         if ($data) {
             return redirect()->back()->with('success', 'Data deleted successfully.');
         } else {

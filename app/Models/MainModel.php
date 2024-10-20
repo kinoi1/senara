@@ -19,7 +19,7 @@ class MainModel extends Model
 
     public static function GetMenu($id){
         return DB::table('menu')
-                    ->select('MenuID','Name','Icon')
+                    ->select('MenuID','Name','Icon','Link')
                     ->whereIn('MenuID', $id)
                     ->get();
     }

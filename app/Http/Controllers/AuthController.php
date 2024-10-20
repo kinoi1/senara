@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -44,29 +45,80 @@ class AuthController extends Controller
     }
 }
 
-public function login(Request $request)
-{
-    // Validasi input
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|string|min:6',
-    ]);
+    public function login(Request $request)
+    {
+        try {
+            // Validasi input
+            
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string|min:6',
+            ]);
 
-    // Cek kredensial pengguna
-    $credentials = $request->only('email', 'password');
+            // Cek kredensial pengguna
+            //$credentials = $request->only('email', 'password');
+            // dd($credentials);
+            $user = AuthModel::where('email', $request->email)->first();
+            if(Hash::check($request->password,$user->Password) && $user->Email == $request->email)
+            {
+                // Jika login berhasil, simpan data ke session
+                $request->session()->regenerate(); // Regenerasi session ID untuk keamanan
 
-    // Auth::attempt akan otomatis mengecek hash bcrypt di database
-    if (Auth::attempt($credentials)) {
-        // Regenerasi sesi setelah berhasil login
-        $request->session()->regenerate();
+                // Simpan informasi pengguna ke dalam session
+                Session::put('UserID', $user->UserID);
+                Session::put('Email', $user->Email);
+                Session::put('HakAksesID', $user->HakAksesID); // Simpan hak akses jika diperlukan
 
-        // Redirect ke dashboard
-        return redirect()->intended('/dashboard')->with('success', 'Login berhasil');
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login Successfully',
+                ]);
+            } else 
+            {
+                // Jika login gagal
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Password or Email is Wrong',
+                ]);
+            }
+
+            // if (!$user) {
+            //     // Jika email tidak ditemukan
+            //     return response()->json([
+            //         'status' => 'error',
+            //         'message' => 'Email tidak ditemukan.',
+            //     ], 404);
+            // }
+
+            // // Jika email ditemukan, cek password dengan Auth::attempt
+            // if (!Auth::attempt($request->only('email', 'password'))) {
+            //     // Jika password salah
+            //     return response()->json([
+            //         'status' => 'error',
+            //         'message' => 'Password salah.',
+            //     ], 401);
+            // }
+            // Auth::attempt akan otomatis mengecek hash bcrypt di database
+            // if (Auth::attempt($credentials)) {
+            //     // Regenerasi sesi setelah berhasil login
+            //     // $request->session()->regenerate();
+
+            //     // Redirect ke dashboard
+            //     return response()->json([
+            //         'status' => true,
+            //         'message' => 'Login berhasil',
+            //     ]);
+            // }
+
+            
+        } catch (\Exception $e) {
+            // Menangkap semua error yang mungkin terjadi
+            // return back()->withErrors([
+            //     'error' => 'Terjadi kesalahan pada server: ' . $e->getMessage(),
+            // ])->withInput();
+            return json_encode($e);
+        }
     }
 
-    // Jika login gagal
-    return back()->withErrors([
-        'email' => 'Email atau password salah.',
-    ])->onlyInput('email');
-}
 }

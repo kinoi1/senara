@@ -23,25 +23,9 @@ class SidebarServiceProvider extends ServiceProvider
                 // Ambil hakaksesid dari session
                 // $hakaksesid = Session::get('HakAksesID');
 
-                // if (!$hakaksesid) {
-                //     throw new \Exception('Hak Akses ID tidak ditemukan di session.');
-                // }
-
                 // Filter menu berdasarkan hakaksesid
                 $menuid = MainModel::GetMenuID(1)->first();
-                // if (!$menuid) {
-                //     throw new \Exception('Gagal mendapatkan Menu ID berdasarkan HakAksesID.');
-                // }
-                // var_dump($menuid);
-                // Ubah JSON menjadi array
-                // $menuid = json_decode($menuid);
-
                 $menuid = json_decode($menuid->MenuID, true);
-
-                
-                // if (json_last_error() !== JSON_ERROR_NONE) {
-                //     throw new \Exception('Gagal mengonversi JSON ke array: ' . json_last_error_msg());
-                // }
 
                 // Ambil data menu berdasarkan menu ID
                 $menu = MainModel::GetMenu($menuid);
