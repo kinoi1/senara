@@ -23,6 +23,7 @@ class AuthModel extends Model
         'Name',
         'Email',
         'Password',
+        'Active',
     ];
 
     /**

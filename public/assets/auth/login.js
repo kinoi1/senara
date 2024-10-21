@@ -28,7 +28,7 @@ function login() {
                 text: "Login successfully.",
                 icon: "success",
             }).then(() => {
-                location.reload(); // Reload halaman setelah OK ditekan
+                location.href = '/dashboard'; // Reload halaman setelah OK ditekan
             });
         } else {
             // Jika gagal

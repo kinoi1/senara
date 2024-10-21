@@ -24,6 +24,7 @@
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 </head>
 
 <body class="">
@@ -154,6 +155,8 @@
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/assets/plugin/softui/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   <script src="/assets/auth/login.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script></body>
+
 </body>
 
 </html>
