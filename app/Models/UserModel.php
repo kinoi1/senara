@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class UserModel extends Model
 {
     public static function getalluser(){
-        return DB::table('user')
-             ->select('UserID','Name', 'Price','Qty','Image')
+        return DB::table('user as A')
+             ->select('A.UserID','A.Name', 'A.Email','A.Image','B.Name as HakAkses')
+             ->leftJoin('hakakses as B', 'A.HakAksesID', '=', 'B.HakAksesID') 
              ->get();
      }
  

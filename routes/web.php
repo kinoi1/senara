@@ -6,6 +6,7 @@ use App\Http\Controllers\PaketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::prefix('product')->middleware('checksession')->group(function () {
     Route::post('/save', [ProductController::class,"save"]);
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+});
+
+Route::prefix('user')->middleware('checksession')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('product.index');
+    Route::post('/save', [UserController::class,"save"]);
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('product.edit');
+    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('product.delete');
 });
 
 Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');

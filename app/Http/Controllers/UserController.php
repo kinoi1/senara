@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index(){
 
         $list_data = UserModel::getalluser();
-        return view('backend.master.product.index',compact('list_data'));
+        return view('backend.master.users.index',compact('list_data'));
     }
 
 
