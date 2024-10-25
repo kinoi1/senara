@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,13 +16,14 @@ class UserModel extends Model
              ->get();
      }
  
-     public static function insert($data)
+     public static function insert($request)
      {
          $insert_id = DB::table('user')->insertGetId([
-                 'Name' => $data['nama'],
-                 'Price' => $data['price'],
-                 'Qty'   => $data['qty'],
-                 'Image' => $data['imagepath']
+                'Name'       => $request['name'],
+                'Email'      => $request['email'],
+                'Password'   => Hash::make($request['password']),
+                'Active'     => 0,
+                'HakAksesID' => $request['hakaksesid']
              ]);
   
          return $insert_id;
@@ -32,10 +34,10 @@ class UserModel extends Model
         return DB::table('user')
              ->where('UserID', $UserID)
              ->update([
-                 'Name' => $data['nama'],
-                 'Email' => $data['price'],
-                 'Qty'   => $data['qty'],
-                 'Image' => $data['imagepath']
+                'Name'       => $data->name,
+                'Email'      => $data->email,
+                'Active'     => 0,
+                'HakAksesID' => $data->hakaksesid
              ]);
      }
  

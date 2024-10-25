@@ -10,17 +10,28 @@ class MainModel extends Model
 {
     use HasFactory;
 
-    public static function GetMenuID($id){
-        return DB::table('hakakses')
+    const table_hakakses = 'hakakses';
+
+    public static function GetMenuID($id)
+    {
+        return DB::table(self::table_hakakses)
                     ->select('MenuID')
                     ->where('HakAksesID', $id)
                     ->get();
     }
 
-    public static function GetMenu($id){
+    public static function GetMenu($id)
+    {
         return DB::table('menu')
                     ->select('MenuID','Name','Icon','Link')
                     ->whereIn('MenuID', $id)
                     ->get();
+    }
+
+    public static function GetHakAkses()
+    {
+        return DB::table(self::table_hakakses)
+        ->select('HakAksesID','Name')
+        ->get();
     }
 }

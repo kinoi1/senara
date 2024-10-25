@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $main;
+
+    // Model di-inject melalui constructor
+    public function __construct(MainModel $main)
+    {
+        $this->main = $main;
+    }
+
+
     public function index(){
 
         $list_data = UserModel::getalluser();
-        return view('backend.master.users.index',compact('list_data'));
+        $list_hakakses = $this->main::GetHakAkses();
+
+        return view('backend.master.users.index',compact('list_data','list_hakakses'));
     }
 
 
@@ -34,24 +46,23 @@ class UserController extends Controller
     }
 
     public function save(Request $request){
-        if ($request->hasFile('gambar')) {
-            // Simpan file gambar dan ambil path-nya
-            $imagePath = $request->file('gambar')->store('gambar', 'public'); // Folder "product_images" di storage/public
-            $request->merge(['imagepath' => $imagePath]);
-        } else {
-            $imagePath = null; // Jika tidak ada gambar, set null
-            $request->merge(['imagepath' => $imagePath]);
-        }
-
+        // if ($request->hasFile('gambar')) {
+        //     // Simpan file gambar dan ambil path-nya
+        //     $imagePath = $request->file('gambar')->store('gambar', 'public'); // Folder "product_images" di storage/public
+        //     $request->merge(['imagepath' => $imagePath]);
+        // } else {
+        //     $imagePath = null; // Jika tidak ada gambar, set null
+        //     $request->merge(['imagepath' => $imagePath]);
+        // }
         if ($request->userid == '') {
             $ResellerID = UserModel::insert($request->all());
-            return redirect()->route('product.index')
-            ->with('success', 'Product created successfully.');
+            return redirect()->route('user.index')
+            ->with('success', 'User created successfully.');
         } else {
             // Jika productId ada, jalankan update
-            $result = UserModel::updateProduct($request->userid, $request->all());
-            return redirect()->route('product.index')
-            ->with('success', 'Product update successfully.');
+            $result = UserModel::updateUser($request->userid, $request->all());
+            return redirect()->route('user.index')
+            ->with('success', 'User update successfully.');
         }
     }
 

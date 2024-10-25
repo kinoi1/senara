@@ -7,44 +7,33 @@
     width: 19px;
   }
 </style>
-<div id="userForm" class="row d-none">
+<div id="categoryForm" class="row d-none">
     <div class="col-4">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>Form Tambah</h6>
+          <h6>Form Reseller</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-3">
-                <form id="form" action="/user/save"  method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="userid">
+                <form id="form" action="/category/save"  method="POST">
+                    <input type="hidden" name="categoryid">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" class="form-control" id="price" name="price" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" required>
+                        <label for="qty" class="form-label">Qty</label>
+                        <input type="text" class="form-control" id="qty" name="qty" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="qty" class="form-label">Hak Akses</label>
-                        <select name="hakaksesid" class="form-select">
-                            @foreach ($list_hakakses as $a)
-                                <option value="{{ $a->HakAksesID }}">{{ $a->Name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    
-
-                    <button type="submit" class="btn btn-primary"> Simpan</button>
+                    <button type="submit" class="btn btn-primary">  Simpan Produk  </button>
                 </form>
             </div>
         </div>
@@ -62,14 +51,12 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
-            <table id="user" class="table table-responsive">
+            <table id="category" class="table table-responsive">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Gambar</th>
                         <th>Nama</th>
-                        <th>Email</th>
-                        <th>Hak Akses</th>
+                        <th>Gambar</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -80,13 +67,11 @@
                     @foreach ($list_data as $a )
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td><img class="img-100" src="{{ asset('storage/'.$a->Image) }}" alt=""> </td>
                             <td>{{ $a->Name }}</td>
-                            <td>{{ $a->Email }}</td>
-                            <td>{{ $a->HakAkses }}</td>
+                            <td>{{ $a->Image }}</td>
                             <td>
-                                <a href="#" onclick="deleteUser({{ $a->UserID }}, '{{ csrf_token() }}')"> <span class="fa fa-trash"></span></a>
-                                <a href="#" onclick="edit({{ $a->UserID }}, '{{ csrf_token() }}')"><span class="fas fa-edit"></span></a>
+                                <a href="#" onclick="deleteCategory({{ $a->CategoryID }}, '{{ csrf_token() }}')"> <span class="fa fa-trash"></span></a>
+                                <a href="#" onclick="edit({{ $a->CategoryID }}, '{{ csrf_token() }}')"><span class="fas fa-edit"></span></a>
                             </td>
                         </tr>
                     @endforeach
@@ -130,5 +115,5 @@
       </div>
     </div>
   </footer>
-  <script src="{{ asset('assets/backend/user.js') }}"></script>
+  <script src="{{ asset('assets/backend/category.js') }}"></script>
 @endsection

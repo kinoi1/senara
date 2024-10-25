@@ -74,14 +74,14 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'Login Successfully',
-                ]);
+                ],200);
             } else 
             {
                 // Jika login gagal
                 return response()->json([
                     'status' => false,
                     'message' => 'Password or Email is Wrong',
-                ]);
+                ],200);
             }
 
             // if (!$user) {

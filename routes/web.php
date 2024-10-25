@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaketController;
 use Illuminate\Support\Facades\Route;
@@ -32,13 +33,9 @@ Route::prefix('dashboard')->middleware('checksession')->group(function () {
 });
 
 Route::prefix('reseller')->middleware('checksession')->group(function () {
-    // Route untuk menampilkan halaman reseller
     Route::get('/', [ResellerController::class, 'index'])->name('reseller.index');
-    // Route untuk menyimpan reseller
     Route::post('/save', [ResellerController::class, 'save'])->name('reseller.save');
-    // Route untuk mengedit reseller
     Route::get('/edit/{id}', [ResellerController::class, 'edit'])->name('reseller.edit');
-    // Route untuk menghapus reseller
     Route::delete('/delete/{id}', [ResellerController::class, 'delete'])->name('reseller.delete');
 });
 
@@ -50,10 +47,17 @@ Route::prefix('product')->middleware('checksession')->group(function () {
 });
 
 Route::prefix('user')->middleware('checksession')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('product.index');
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
     Route::post('/save', [UserController::class,"save"]);
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('product.edit');
-    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('product.delete');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+});
+
+Route::prefix('category')->middleware('checksession')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/save', [CategoryController::class,"save"]);
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 });
 
 Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
