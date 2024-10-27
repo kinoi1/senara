@@ -11,26 +11,28 @@
     <div class="col-4">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>Form Reseller</h6>
+          <h6>Form Category</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-3">
-                <form id="form" action="/category/save"  method="POST">
+                <form id="form" action="/category/save"  method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="categoryid">
                     @csrf
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required>
+                        <input type="text" class="form-control" id="nama" name="name" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
+                    <select name="categorytype">
+                      <option value=""> Pilih </option>
+                      @foreach ($list_type as $a)
+                        <option value="{{ $a->CategoryTypeID }}"> {{ $a->Name }}</option>
+                      @endforeach
+                    </select>
 
                     <div class="mb-3">
-                        <label for="qty" class="form-label">Qty</label>
-                        <input type="text" class="form-control" id="qty" name="qty" required>
+                      <label for="gambar" class="form-label">Upload Gambar</label>
+                      <input class="dropify" type="file" name="gambar" accept="image/*" >
                     </div>
 
                     <button type="submit" class="btn btn-primary">  Simpan Produk  </button>

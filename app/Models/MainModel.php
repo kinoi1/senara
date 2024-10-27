@@ -11,6 +11,8 @@ class MainModel extends Model
     use HasFactory;
 
     const table_hakakses = 'hakakses';
+    const table_categorytype = 'categorytype';
+    const table_menu = 'menu';
 
     public static function GetMenuID($id)
     {
@@ -22,7 +24,7 @@ class MainModel extends Model
 
     public static function GetMenu($id)
     {
-        return DB::table('menu')
+        return DB::table(self::table_menu)
                     ->select('MenuID','Name','Icon','Link')
                     ->whereIn('MenuID', $id)
                     ->get();
@@ -32,6 +34,13 @@ class MainModel extends Model
     {
         return DB::table(self::table_hakakses)
         ->select('HakAksesID','Name')
+        ->get();
+    }
+
+    public static function GetCategoryType()
+    {
+        return DB::table(self::table_categorytype)
+        ->select('CategoryTypeID','Name')
         ->get();
     }
 }

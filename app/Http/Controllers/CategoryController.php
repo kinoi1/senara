@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryModel;
+use App\Models\MainModel;
 use Illuminate\Http\Request;
+use App\Models\CategoryModel;
 
 class CategoryController extends Controller
 {
+    protected $main;
+
+    // Model di-inject melalui constructor
+    public function __construct(MainModel $main)
+    {
+        $this->main = $main;
+    }
+    
     public function index(){
 
+        $list_type = $this->main::GetCategoryType();
         $list_data = CategoryModel::getallcategory();
-        return view('backend.master.category.index',compact('list_data'));
+        return view('backend.master.category.index',compact('list_data','list_type'));
     }
 
 
@@ -22,7 +32,7 @@ class CategoryController extends Controller
         if ($data) {
             return response()->json([
                 'message' => 'Product found',
-                'product' => $data
+                'category' => $data
             ], 200);
         } else {
             return response()->json([
@@ -32,14 +42,23 @@ class CategoryController extends Controller
     }
 
     public function save(Request $request){
-        if ($request->productid == '') {
-            $ResellerID = CategoryModel::insert($request->all());
-            return redirect()->route('product.index')
+        if ($request->hasFile('gambar')) {
+            // Simpan file gambar dan ambil path-nya
+            $imagePath = $request->file('gambar')->store('gambar', 'public'); // Folder "product_images" di storage/public
+            $request->merge(['imagepath' => $imagePath]);
+        } else {
+            $imagePath = null; // Jika tidak ada gambar, set null
+            $request->merge(['imagepath' => $imagePath]);
+        }
+
+        if ($request->categoryid == '') {
+            $CategoryID = CategoryModel::insert($request->all());
+            return redirect()->route('category.index')
             ->with('success', 'Product created successfully.');
         } else {
             // Jika productId ada, jalankan update
-            $result = CategoryModel::updateProduct($request->productid, $request->all());
-            return redirect()->route('product.index')
+            $result = CategoryModel::updateCategory($request->categoryid, $request->all());
+            return redirect()->route('category.index')
             ->with('success', 'Product update successfully.');
         }
     }
