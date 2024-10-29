@@ -24,6 +24,15 @@
                     </div>
 
                     <div class="mb-3">
+                      <label for="categorytypeid">Category</label>
+                      <select name="categoryid" class="form-control">
+                        <option value=""> Pilih </option>
+                        @foreach ($list_category as $a)
+                          <option value="{{ $a->CategoryID }}"> {{ $a->Name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" required>
                     </div>
@@ -62,6 +71,7 @@
                         <th>No</th>
                         <th>Gambar</th>
                         <th>Nama</th>
+                        <th>Category</th>
                         <th>Price</th>
                         <th>Qty</th>
                         <th>Action</th>
@@ -76,6 +86,7 @@
                             <td>{{ $no++ }}</td>
                             <td><img class="img-100" src="{{ asset('storage/'.$a->Image) }}" alt=""> </td>
                             <td>{{ $a->Name }}</td>
+                            <td>{{ $a->CategoryName }}</td>
                             <td>{{ $a->Price }}</td>
                             <td>{{ $a->Qty }}</td>
                             <td>

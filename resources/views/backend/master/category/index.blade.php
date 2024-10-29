@@ -23,12 +23,20 @@
                         <input type="text" class="form-control" id="nama" name="name" required>
                     </div>
 
-                    <select name="categorytype">
-                      <option value=""> Pilih </option>
-                      @foreach ($list_type as $a)
-                        <option value="{{ $a->CategoryTypeID }}"> {{ $a->Name }}</option>
-                      @endforeach
-                    </select>
+                    <div class="mb-3 diskon">
+                      <label for="discount" class="form-label">Discount</label>
+                      <input type="text" class="form-control" name="percent" >
+                    </div>
+
+                    <div class="mb-3 diskon">
+                      <label for="date" class="form-label">Start Date</label>
+                      <input type="text" class="form-control date" name="date" >
+                    </div>
+
+                    <div class="mb-3 diskon">
+                      <label for="duration" class="form-label">Duration</label>
+                      <input type="text" class="form-control" name="duration" >
+                    </div>
 
                     <div class="mb-3">
                       <label for="gambar" class="form-label">Upload Gambar</label>

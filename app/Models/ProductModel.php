@@ -9,14 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ProductModel extends Model
 {
     public static function getallproduct(){
-        return DB::table('product')
-             ->select('ProductID','Name', 'Price','Qty','Image')
+        return DB::table('product as A')
+             ->select('A.ProductID','A.CategoryID','A.Name','B.Name as CategoryName', 'A.Price','A.Qty','A.Image')
+             ->leftJoin('Category as B','A.CategoryID','=','B.CategoryID')
              ->get();
      }
  
      public static function insert($data)
      {
          $insert_id = DB::table('product')->insertGetId([
+                 'CategoryID' => $data['categoryid'],
                  'Name' => $data['nama'],
                  'Price' => $data['price'],
                  'Qty'   => $data['qty'],
@@ -31,6 +33,7 @@ class ProductModel extends Model
         return DB::table('product')
              ->where('ProductID', $productid)
              ->update([
+                 'CategoryID' => $data['categoryid'],
                  'Name' => $data['nama'],
                  'Price' => $data['price'],
                  'Qty'   => $data['qty'],
@@ -41,7 +44,7 @@ class ProductModel extends Model
      public static function getById($id)
      {
          return DB::table('product')
-         ->select('ProductID','Name', 'Price','Qty','Image')
+         ->select('ProductID','CategoryID','Name', 'Price','Qty','Image')
          ->where('ProductID', $id)->first();
      }
  

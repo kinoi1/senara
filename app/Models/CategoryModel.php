@@ -18,6 +18,9 @@ class CategoryModel extends Model
      {
          $insert_id = DB::table('category')->insertGetId([
                  'Name' => $data['name'],
+                 'Percent' => $data['percent'],
+                 'Duration' => $data['duration'],
+                 'Date' => $data['date'],
                  'Image' => $data['imagepath'],
                  'Active'   => 1,
                  'DateAdd' => date('Y-m-d H:i:s'),
@@ -33,6 +36,9 @@ class CategoryModel extends Model
              ->update([
                  'Name' => $data['name'],
                  'Image' => $data['imagepath'],
+                 'Percent' => $data['percent'],
+                 'Duration' => $data['duration'],
+                 'Date' => $data['date'],
                  'Active'   => 1,
                  'UpdateAt' => date('Y-m-d H:i:s')
              ]);

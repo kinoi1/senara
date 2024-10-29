@@ -11,8 +11,9 @@ class MainModel extends Model
     use HasFactory;
 
     const table_hakakses = 'hakakses';
-    const table_categorytype = 'categorytype';
+    // const table_categorytype = 'categorytype';
     const table_menu = 'menu';
+    const table_category = 'category';
 
     public static function GetMenuID($id)
     {
@@ -37,10 +38,17 @@ class MainModel extends Model
         ->get();
     }
 
-    public static function GetCategoryType()
+    // public static function GetCategoryType()
+    // {
+    //     return DB::table(self::table_categorytype)
+    //     ->select('CategoryTypeID','Name')
+    //     ->get();
+    // }
+
+    public static function GetCategory()
     {
-        return DB::table(self::table_categorytype)
-        ->select('CategoryTypeID','Name')
-        ->get();
+        return DB::table(self::table_category)
+            ->select('CategoryID','Name')
+            ->get();
     }
 }

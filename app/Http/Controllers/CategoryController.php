@@ -18,9 +18,9 @@ class CategoryController extends Controller
     
     public function index(){
 
-        $list_type = $this->main::GetCategoryType();
+        // $list_type = $this->main::GetCategoryType();
         $list_data = CategoryModel::getallcategory();
-        return view('backend.master.category.index',compact('list_data','list_type'));
+        return view('backend.master.category.index',compact('list_data'));
     }
 
 
@@ -49,6 +49,16 @@ class CategoryController extends Controller
         } else {
             $imagePath = null; // Jika tidak ada gambar, set null
             $request->merge(['imagepath' => $imagePath]);
+        }
+
+        if(!$request->percent){
+            $request->merge(['percent' => null]);
+        }
+        if(!$request->percent){
+            $request->merge(['duration' => null]);
+        }
+        if(!$request->percent){
+            $request->merge(['date' => null]);
         }
 
         if ($request->categoryid == '') {

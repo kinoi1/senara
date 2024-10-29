@@ -37,6 +37,7 @@ function edit(productid, csrfToken) {
             a = data.product;
             // Mengisi form dengan data yang didapatkan dari server
             $("[name='productid']").val(a.ProductID);
+            $("[name='categoryid']").val(a.CategoryID);
             $("[name='nama']").val(a.Name);
             $("[name='price']").val(a.Price);
             $("[name='qty']").val(a.Qty);

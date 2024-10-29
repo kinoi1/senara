@@ -107,3 +107,31 @@ function resetForm() {
     $('#form')[0].reset();
     $("[name='categoryid']").val('');
 }
+
+function checkcategory(){
+   categoryid  = $('[name=categorytypeid]').find(':selected').val();
+   console.log(categoryid);
+   if(categoryid != '1'){
+        $('.diskon').show();
+   }else{
+        $('.diskon').hidden();
+        $('[name=percent]').val('');
+        $('[name=date]').val('');     
+        $('[name=duration]').val('');   
+
+   }
+}
+
+if ($("input, div").hasClass("date")) {
+    datex();
+}
+
+function datex(){
+    container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+    $(".date").datepicker({
+        format: 'dd-mm-yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    });
+}

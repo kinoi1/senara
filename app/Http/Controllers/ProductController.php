@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    protected $main;
+
+    // Model di-inject melalui constructor
+    public function __construct(MainModel $main)
+    {
+        $this->main = $main;
+    }
     
     public function index(){
 
         $list_data = ProductModel::getallproduct();
-        return view('backend.master.product.index',compact('list_data'));
+        $list_category = $this->main::GetCategory();
+        return view('backend.master.product.index',compact('list_data','list_category'));
     }
 
 
