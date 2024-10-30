@@ -14,6 +14,7 @@ class MainModel extends Model
     // const table_categorytype = 'categorytype';
     const table_menu = 'menu';
     const table_category = 'category';
+    const table_user = 'user';
 
     public static function GetMenuID($id)
     {
@@ -50,5 +51,24 @@ class MainModel extends Model
         return DB::table(self::table_category)
             ->select('CategoryID','Name')
             ->get();
+    }
+
+    public static function GenerateReferralCode() {
+        $length = 6;
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $charactersLength = strlen($characters);
+        
+        do {
+            $referralCode = '';
+            for ($i = 0; $i < $length; $i++) {
+                $referralCode .= $characters[rand(0, $charactersLength - 1)];
+            }
+    
+            // Cek apakah kode sudah ada di tabel user
+            $codeExists = DB::table('user')->where('ReferralCode', $referralCode)->exists();
+    
+        } while ($codeExists);
+    
+        return $referralCode;
     }
 }

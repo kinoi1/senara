@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuthModel;
+use App\Models\MainModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,14 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    protected $main;
+
+    // Model di-inject melalui constructor
+    public function __construct(MainModel $main)
+    {
+        $this->main = $main;
+    }
+
     public function index(){
 
         return view('auth.login');
@@ -25,10 +34,12 @@ class AuthController extends Controller
 
     try {
         // Insert data user
+        $ReferralCode = $this->main::GenerateReferralCode();
         $user = AuthModel::create([
             'Name' => $request->name,
             'Email' => $request->email,
             'Password' => Hash::make($request->password),
+            'ReferralCode' => $ReferralCode,
             'Active'   => 0
         ]);
 
@@ -83,36 +94,7 @@ class AuthController extends Controller
                     'message' => 'Password or Email is Wrong',
                 ],200);
             }
-
-            // if (!$user) {
-            //     // Jika email tidak ditemukan
-            //     return response()->json([
-            //         'status' => 'error',
-            //         'message' => 'Email tidak ditemukan.',
-            //     ], 404);
-            // }
-
-            // // Jika email ditemukan, cek password dengan Auth::attempt
-            // if (!Auth::attempt($request->only('email', 'password'))) {
-            //     // Jika password salah
-            //     return response()->json([
-            //         'status' => 'error',
-            //         'message' => 'Password salah.',
-            //     ], 401);
-            // }
-            // Auth::attempt akan otomatis mengecek hash bcrypt di database
-            // if (Auth::attempt($credentials)) {
-            //     // Regenerasi sesi setelah berhasil login
-            //     // $request->session()->regenerate();
-
-            //     // Redirect ke dashboard
-            //     return response()->json([
-            //         'status' => true,
-            //         'message' => 'Login berhasil',
-            //     ]);
-            // }
-
-            
+           
         } catch (\Exception $e) {
             // Menangkap semua error yang mungkin terjadi
             // return back()->withErrors([

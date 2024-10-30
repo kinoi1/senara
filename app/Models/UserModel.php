@@ -11,7 +11,7 @@ class UserModel extends Model
 {
     public static function getalluser(){
         return DB::table('user as A')
-             ->select('A.UserID','A.Name', 'A.Email','A.Image','B.Name as HakAkses')
+             ->select('A.UserID','A.Name', 'A.Email','A.Image','B.Name as HakAkses','A.ReferralCode')
              ->leftJoin('hakakses as B', 'A.HakAksesID', '=', 'B.HakAksesID') 
              ->get();
      }
@@ -19,11 +19,12 @@ class UserModel extends Model
      public static function insert($request)
      {
          $insert_id = DB::table('user')->insertGetId([
-                'Name'       => $request['name'],
-                'Email'      => $request['email'],
-                'Password'   => Hash::make($request['password']),
-                'Active'     => 0,
-                'HakAksesID' => $request['hakaksesid']
+                'Name'        => $request['name'],
+                'Email'       => $request['email'],
+                'Password'    => Hash::make($request['password']),
+                'ReferralCode'=> $request['ReferralCode'],
+                'Active'      => 0,
+                'HakAksesID'  => $request['hakaksesid']
              ]);
   
          return $insert_id;
@@ -52,4 +53,9 @@ class UserModel extends Model
      {
          return DB::table('user')->where('UserID', $id)->delete();
      }
+
+    //  public static function cekReferralCode($referralCode){
+    //     return DB::table('user')->where('ReferralCode', $referralCode)->exists();
+    //  }
+
 }

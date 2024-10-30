@@ -69,6 +69,7 @@
                         <th>Gambar</th>
                         <th>Nama</th>
                         <th>Email</th>
+                        <th>Referral Code</th>
                         <th>Hak Akses</th>
                         <th>Action</th>
                     </tr>
@@ -83,6 +84,7 @@
                             <td><img class="img-100" src="{{ asset('storage/'.$a->Image) }}" alt=""> </td>
                             <td>{{ $a->Name }}</td>
                             <td>{{ $a->Email }}</td>
+                            <td>{{ $a->ReferralCode }}</td>
                             <td>{{ $a->HakAkses }}</td>
                             <td>
                                 <a href="#" onclick="deleteUser({{ $a->UserID }}, '{{ csrf_token() }}')"> <span class="fa fa-trash"></span></a>

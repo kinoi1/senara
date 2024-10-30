@@ -46,15 +46,9 @@ class UserController extends Controller
     }
 
     public function save(Request $request){
-        // if ($request->hasFile('gambar')) {
-        //     // Simpan file gambar dan ambil path-nya
-        //     $imagePath = $request->file('gambar')->store('gambar', 'public'); // Folder "product_images" di storage/public
-        //     $request->merge(['imagepath' => $imagePath]);
-        // } else {
-        //     $imagePath = null; // Jika tidak ada gambar, set null
-        //     $request->merge(['imagepath' => $imagePath]);
-        // }
         if ($request->userid == '') {
+            $ReferralCode = $this->main::GenerateReferralCode();
+            $request->merge(['ReferralCode' => $ReferralCode]);
             $ResellerID = UserModel::insert($request->all());
             return redirect()->route('user.index')
             ->with('success', 'User created successfully.');
