@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/plugin/organic/css/vendor.css">
     <link rel="stylesheet" type="text/css" href="/assets/plugin/organic/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/frontend_main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -333,8 +334,9 @@
                 </a>
               </li>
               <li>
-                <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <a href="#" class="p-2 mx-1 decoration-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                   <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
+                  <span id="totalcart"></span>
                 </a>
               </li>
             </ul>
@@ -560,7 +562,7 @@
                       <div class="button-area p-3 pt-0">
                         <div class="row g-1 mt-2">
                           <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
-                          <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart</a></div>
+                          <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" onclick="addtocart({{ $a->ProductID }})"><svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart</a></div>
                           <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg width="18" height="18"><use xlink:href="#heart"></use></svg></a></div>
                         </div>
                       </div>
@@ -2307,5 +2309,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="/assets/plugin/organic/js/plugins.js"></script>
     <script src="/assets/plugin/organic/js/script.js"></script>
+    <script src="/assets/frontend/frontend_main.js"></script>
   </body>
 </html>

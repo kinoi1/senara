@@ -17,6 +17,7 @@
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="/assets/plugin/softui//css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/assets/frontend/frontend_main.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/plugin/softui/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 </head>

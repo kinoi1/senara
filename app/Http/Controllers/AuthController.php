@@ -78,6 +78,7 @@ class AuthController extends Controller
 
                 // Simpan informasi pengguna ke dalam session
                 Session::put('UserID', $user->UserID);
+                Session::put('Name',$user->Name);
                 Session::put('Email', $user->Email);
                 Session::put('HakAksesID', $user->HakAksesID); // Simpan hak akses jika diperlukan
 
