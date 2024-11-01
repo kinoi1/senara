@@ -17,4 +17,14 @@ class PaketModel extends Model
              ->where('A.CategoryID','=',3)
              ->get();
      }
+     public static function insert($data)
+     {
+         $insert_id = DB::table('transactioncart')->insertGetId([
+                 'ProductID' => $data['productid'],
+                 'ResellerID' => $data['resellerid'],
+                 'Qty'   => $data['qty'],
+             ]);
+  
+         return $insert_id;
+     }
 }

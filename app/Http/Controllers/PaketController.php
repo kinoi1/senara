@@ -13,4 +13,12 @@ class PaketController extends Controller
 
         return view('frontend.layouts.index',compact('list_best'));
     }
+
+    public function addToCart(Request $request){
+        $request->merge(['resellerid' => Session('ResellerID')]);
+        $CartID = PaketModel::insert($request->all());
+
+        echo JSON_ENCODE('berhasil');
+
+    }
 }

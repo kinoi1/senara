@@ -336,7 +336,7 @@
               <li>
                 <a href="#" class="p-2 mx-1 decoration-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                   <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
-                  <span id="totalcart"></span>
+                  <span class="text-cart" id="totalcart"></span>
                 </a>
               </li>
             </ul>
@@ -561,8 +561,8 @@
                       </div>
                       <div class="button-area p-3 pt-0">
                         <div class="row g-1 mt-2">
-                          <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
-                          <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" onclick="addtocart({{ $a->ProductID }})"><svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart</a></div>
+                          <div class="col-3"><input id="qty_{{ $a->ProductID }}" type="number" name="quantity" min="1" class="form-control border-dark-subtle input-number quantity" value="1"></div>
+                          <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" data-token="{{ csrf_token() }}" onclick="addtocart({{ $a->ProductID }},this)"><svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart</a></div>
                           <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg width="18" height="18"><use xlink:href="#heart"></use></svg></a></div>
                         </div>
                       </div>

@@ -70,7 +70,18 @@ class AuthController extends Controller
             // Cek kredensial pengguna
             //$credentials = $request->only('email', 'password');
             // dd($credentials);
-            $user = AuthModel::where('email', $request->email)->first();
+            $user = AuthModel::where('A.email', $request->email)
+            ->from('user as A')
+            ->leftJoin('reseller as B', 'A.UserID', '=', 'B.UserID') // Melakukan LEFT JOIN ke tabel profiles
+            ->select(
+                'A.UserID', 
+                'A.Password',
+                'A.Email',
+                'A.Name',
+                'A.HakAksesID',
+                'B.ResellerID',
+                ) 
+            ->first();
             if(Hash::check($request->password,$user->Password) && $user->Email == $request->email)
             {
                 // Jika login berhasil, simpan data ke session
@@ -78,6 +89,7 @@ class AuthController extends Controller
 
                 // Simpan informasi pengguna ke dalam session
                 Session::put('UserID', $user->UserID);
+                Session::put('ResellerID', $user->ResellerID);
                 Session::put('Name',$user->Name);
                 Session::put('Email', $user->Email);
                 Session::put('HakAksesID', $user->HakAksesID); // Simpan hak akses jika diperlukan
