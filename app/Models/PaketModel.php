@@ -27,4 +27,10 @@ class PaketModel extends Model
   
          return $insert_id;
      }
+
+     public static function GetCountCart(){
+        return DB::table('transactioncart')
+                ->where('ResellerID','=',Session('ResellerID'))
+                ->count();
+     }
 }

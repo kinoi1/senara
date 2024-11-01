@@ -13,3 +13,18 @@
     right: 25%;
     bottom: -35%;
 }
+.cart-modal{
+    display: none;
+    width: 400px;
+    height:200px;
+    position: absolute;
+    right: 2%;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.cart-image{
+    max-width: 60px;
+}
+.modal-header-cart{
+    border-bottom: 1px solid #c5c5c5;
+}

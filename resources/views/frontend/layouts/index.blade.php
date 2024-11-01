@@ -334,10 +334,25 @@
                 </a>
               </li>
               <li>
-                <a href="#" class="p-2 mx-1 decoration-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <a id="cart_icon" href="#" class="p-2 mx-1 decoration-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                   <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
-                  <span class="text-cart" id="totalcart"></span>
+                  <span class="text-cart" id="totalcart">{{ $count_cart }}</span>
                 </a>
+                <div class="cart-modal">
+                  <div class="d-flex flex-column">
+                    <div class="p-2 col-sm-12 d-flex flex-row modal-header-cart">
+                      <span class="col-sm-10">Keranjang(0)</span>
+                      <span class="col-sm-2">Lihat</span>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="p-2 d-flex flex-row">
+                        <img src="/assets/plugin/organic/images/product-thumb-2.png" alt="Product Thumbnail" class="cart-image">
+                        <span class="col-sm-6">Tes list keranjang aja</span>
+                        <span class="col-sm-4 d-flex justify-content-end">1 x 100.000</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>

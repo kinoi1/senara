@@ -22,7 +22,7 @@ function login() {
                     text: "Login successfully.",
                     icon: "success",
                 }).then(() => {
-                    location.href = '/dashboard'; // Reload halaman setelah OK ditekan
+                    location.href = '/'+data.redirect; // Reload halaman setelah OK ditekan
                 });
             } else {
                 // Jika login gagal, tampilkan pesan error

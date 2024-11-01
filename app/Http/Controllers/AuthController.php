@@ -94,11 +94,17 @@ class AuthController extends Controller
                 Session::put('Email', $user->Email);
                 Session::put('HakAksesID', $user->HakAksesID); // Simpan hak akses jika diperlukan
 
-
-                return response()->json([
+                if($user->ResellerID):
+                    $redirect = 'paket';
+                else:
+                    $redirect = 'dashboard';
+                endif;
+                $response = array(
                     'status' => true,
-                    'message' => 'Login Successfully',
-                ],200);
+                    'redirect' => $redirect
+                );
+
+               echo json_encode($response);
             } else 
             {
                 // Jika login gagal

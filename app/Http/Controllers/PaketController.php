@@ -10,8 +10,8 @@ class PaketController extends Controller
     //
     public function index(){
         $list_best = PaketModel::GetProduct();
-
-        return view('frontend.layouts.index',compact('list_best'));
+        $count_cart = PaketModel::GetCountCart();
+        return view('frontend.layouts.index',compact('list_best','count_cart'));
     }
 
     public function addToCart(Request $request){
