@@ -62,6 +62,7 @@ Route::prefix('category')->middleware('checksession')->group(function () {
 
 Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
 Route::post('/paket/add-to-cart', [PaketController::class, 'addToCart']);
+Route::get('/paket/GetListCart', [PaketController::class, 'GetListCart']);
 Route::get('/test-image', function () {
     return response()->file(storage_path('app/public/gambar/cek.jpg'));
 });

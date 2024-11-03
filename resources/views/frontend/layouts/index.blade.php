@@ -344,12 +344,8 @@
                       <span class="col-sm-10">Keranjang(0)</span>
                       <span class="col-sm-2">Lihat</span>
                     </div>
-                    <div class="col-sm-12">
-                      <div class="p-2 d-flex flex-row">
-                        <img src="/assets/plugin/organic/images/product-thumb-2.png" alt="Product Thumbnail" class="cart-image">
-                        <span class="col-sm-6">Tes list keranjang aja</span>
-                        <span class="col-sm-4 d-flex justify-content-end">1 x 100.000</span>
-                      </div>
+                    <div id="cart_body" class="col-sm-12">
+                      
                     </div>
                   </div>
                 </div>

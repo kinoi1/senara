@@ -18,7 +18,16 @@ class PaketController extends Controller
         $request->merge(['resellerid' => Session('ResellerID')]);
         $CartID = PaketModel::insert($request->all());
 
-        echo JSON_ENCODE('berhasil');
+        echo json_encode('berhasil');
+    }
 
+    public function GetListCart(){
+        $list = PaketModel::GetListCartByID();
+
+        $response = array(
+            'list' => $list
+        );
+
+        echo json_encode($response);
     }
 }

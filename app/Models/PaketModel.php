@@ -33,4 +33,12 @@ class PaketModel extends Model
                 ->where('ResellerID','=',Session('ResellerID'))
                 ->count();
      }
+     public static function GetListCartByID(){
+        return DB::table('transactioncart as A')
+             ->select('A.ProductID','A.Qty','B.Name','B.Price',
+                DB::raw("CONCAT('" . asset('storage/') . "/', B.Image) as Image"))
+             ->leftJoin('product as B','A.ProductID','=','B.ProductID')
+             ->where('A.ResellerID','=',Session('ResellerID'))
+             ->get();
+     }
 }

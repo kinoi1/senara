@@ -3,6 +3,7 @@ $(document).ready(function(){
 
     $('#cart_icon').mouseenter(function() {
         $('.cart-modal').show(); // Menampilkan modal saat kursor masuk
+        GetListCart();
     });
 
     $('#cart_icon').mouseleave(function() {
@@ -59,6 +60,33 @@ function addtocart(id,button){
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
+        }
+    });
+}
+
+function GetListCart(){
+    $.ajax({
+        url: 'paket/GetListCart', // Ganti dengan URL endpoint yang sesuai
+        type: 'GET',
+        dataType: 'JSON',
+        contentType: 'application/json',
+        success: function(response) {
+            item = "";
+            data = response.list;
+            $.each(data,function(i,v){
+                item += '<div class="p-2 d-flex flex-row">';
+                item += '<img src="'+v.Image+'" alt="Product Thumbnail" class="cart-image">';
+                item += '<span class="col-sm-6">'+v.Name+'</span>';
+                item += '<span class="col-sm-4 d-flex justify-content-end">'+v.Qty+' x 100.000</span>';
+                item += '</div>';
+            });
+            $('#cart_body').append(item);
+            // Update isi cart-content dengan data dari response
+            $('#cart-content').html(response);
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+            // $('#cart-content').html('Gagal memuat data cart');
         }
     });
 }
